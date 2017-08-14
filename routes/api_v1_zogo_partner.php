@@ -1,13 +1,23 @@
 
 <?php
 
+/**
+* This part for Auth
+*/
+$app->group(['prefix' => 'api/v1', 'namespace' => 'Authentication'], function($app){
+
+  $app->post('login','AuthenticationController@authenticate');
+
+});
+#-- END ---#
+
 
 /**
 * This part for public access
 */
 $app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners'], function($app){
 
-  $app->get('/welcome', function () use ($app) {
+  $app->get('welcome', function () use ($app) {
       return response()->json(['name' => 'Abigail', 'state' => 'CA']);
   });
 
@@ -17,8 +27,7 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners'], function($app
   });
 
   //Route
-  $app->get('/partner', 'PartnersApiController@index');
-
+  $app->get('partner', 'PartnersApiController@index');
 });
 #-- END ---#
 
@@ -29,7 +38,7 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners'], function($app
 $app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners', 'middleware' => 'auth'], function () use ($app) {
 
     $app->get('user/profile', function () {
-        $user = Auth::user();
+        #$user = Auth::user();
 
         return "OK";
     });
