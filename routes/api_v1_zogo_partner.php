@@ -29,7 +29,9 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners'], function($app
 $app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners', 'middleware' => 'auth'], function () use ($app) {
 
     $app->get('user/profile', function () {
-        // Uses Auth Middleware
+        $user = Auth::user();
+
+        return "OK";
     });
 
 
