@@ -12,7 +12,5 @@
 */
 
 $app->get('/', function () use ($app) {
-    #return $app->version();
-    #return "Hello World ";
     return response()->json(['name' => 'Abigail', 'state' => 'CA']);
 });
