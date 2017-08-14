@@ -11,6 +11,18 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'Authentication'], function($a
 });
 #-- END ---#
 
+/**
+ * This part for authentication data
+ */
+$app->group(['prefix' => 'api/v1',  'middleware' => 'auth'], function () use ($app) {
+
+    //Route
+    $app->get('getUserByApiKey', 'UserController@getUserByApiKey');
+
+
+});
+#-- END --#
+
 
 /**
 * This part for public access
@@ -32,17 +44,4 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners'], function($app
 #-- END ---#
 
 
-/**
-* This part for authentication data
-*/
-$app->group(['prefix' => 'api/v1', 'namespace' => 'ZogoPartners', 'middleware' => 'auth'], function () use ($app) {
 
-    $app->get('profile', function () {
-        #$user = Auth::user();
-
-        return "OK";
-    });
-
-
-});
-#-- END --#
