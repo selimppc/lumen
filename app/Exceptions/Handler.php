@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +46,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        #return parent::render($request, $e);
+        if ($e instanceof NotFoundHttpException)
+        {
+            return response()->json(['status' => 'error','message' => 'Something went wrong ! Invlid Path !!']);
+        }
+
         return parent::render($request, $e);
     }
 }
